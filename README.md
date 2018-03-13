@@ -17,6 +17,7 @@ python pip install django
 python pip install Pillow
 ```
 ###Run
+
 ####From folder mysite
 ```
 python managa.py runserver
