@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="btn-group" data-toggle="buttons">
+	<div class="btn-group"><a href="/" class="btn btn-success btn-lg active">Проекты</a></div>
+	<div class="btn-group"><a href="/sip" class="btn btn-success btn-lg">СИП панели</a></div>
+	<div class="btn-group"><a href="/" class="btn btn-success btn-lg">Теплые крыши, перекрытия для домой из камня и дерева <span class="badge badge-secondary">New</span></a></div>
+	<div class="btn-group"><a href="/" class="btn btn-success btn-lg">Отзывы</a></div>
+	<div class="btn-group"><a href="/" class="btn btn-success btn-lg">Контакты</a></div>
+</div>
+<div class="jumbotron">
+			<div class="middle" style="min-height: 50px;">
+				<div class="left" style="width: 25%;min-height: 50px;float: left;">
+					<div class="search"  style='width: 234px; height: 38px; margin: 6px 0px 0px 0px; background: #fff; border-radius: 4px; position: relative;'>
+						<form action='/' method='post'>
+								<input id='searchText' type='text' autocomplete='off' data-row='0' name='search' value='' placeholder='Поиск по сайту' style='width: 180px; height: 38px; padding: 0px 15px; background: none; border: 0px; font-size: 14px;' required />
+								<input type='submit' name='search_btn' value='' style='width: 15px; height: 15px; background: url(http://villozi.com/theme/villozi/images/search.png) top center no-repeat; position: absolute; top:12px; right: 15px; cursor: pointer; border: 0px;' />
+						</form>
+						<div class='mainSearchRes'>
+							<div class='mainSearchResBox'></div>
+						</div>
+
+					</div>
+				</div>
+				<div class="right" style="width:75%;min-height: 50px; float: right;">
+					<div class="btn-group" data-toggle="buttons" style="width: auto; margin: 5px 137px;">
+						<div class="btn-group"><a href="/100" class="btn btn-outline-success btn-sm active" >до 100 м.кв.</a></div>
+						<div class="btn-group"><a href="/100-150" class="btn btn-outline-success btn-sm">100 - 150 м.кв</a></div>
+						<div class="btn-group"><a href="/150" class="btn btn-outline-success btn-sm">от 150 м.кв</a></div>
+						<div class="btn-group"><a href="/" class="btn btn-outline-success btn-sm" style="font-size: 1.226rem;">Все проекты</a></div>
+					</div>
+				</div>
+			</div>
+	<div class="section">
+		<div class="jumbotron">
+			<div class="row">
+				{% for product_image in products_images_100 %}
+					{% include 'mainApp/product.html' %}
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+			<form action="" method="post" class="form-inline text-center">{% csrf_token %}
+				<div class="form-group">
+					<label>Ваш email:</label>
+					<input type="email" name="form.email.name" class="form-control">
+				</div>
+				<div class="form-group">
+					<label>Ваше имя:</label>
+					<input type="text" name="form.name.name" class="form-control">
+				</div>
+					<button type="submit" class="btn btn-primary">Отправить</button>
+			</form>
+
+		</div>
+{% endblock content %}

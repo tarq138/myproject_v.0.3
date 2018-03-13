@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="btn-group" data-toggle="buttons">
+	<div class="btn-group"><a href="/" class="btn btn-success btn-lg active">Проекты</a></div>
+	<div class="btn-group"><a href="/sip" class="btn btn-success btn-lg">СИП панели</a></div>
+	<div class="btn-group"><a href="/" class="btn btn-success btn-lg">Теплые крыши, перекрытия для домой из камня и дерева <span class="badge badge-secondary">New</span></a></div>
+	<div class="btn-group"><a href="/" class="btn btn-success btn-lg">Отзывы</a></div>
+	<div class="btn-group"><a href="/" class="btn btn-success btn-lg">Контакты</a></div>
+</div>
+
+<div class="jumbotron">
+			<div class="middle" style="min-height: 50px;">
+				<div class="left" style="width: 25%;min-height: 50px;float: left;">
+					<div class="search"  style='width: 234px; height: 38px; margin: 6px 0px 0px 0px; background: #fff; border-radius: 4px; position: relative;'>
+						<form action='/' method='post'>
+								<input id='searchText' type='text' autocomplete='off' data-row='0' name='search' value='' placeholder='Поиск по сайту' style='width: 180px; height: 38px; padding: 0px 15px; background: none; border: 0px; font-size: 14px;' required />
+								<input type='submit' name='search_btn' value='' style='width: 15px; height: 15px; background: url(http://villozi.com/theme/villozi/images/search.png) top center no-repeat; position: absolute; top:12px; right: 15px; cursor: pointer; border: 0px;' />
+						</form>
+						<div class='mainSearchRes'>
+							<div class='mainSearchResBox'></div>
+						</div>
+
+					</div>
+				</div>
+                <div class="right" style="width:75%;min-height: 50px; float: right;">
+					<div class="btn-group" data-toggle="buttons" style="width: auto; margin: 5px 137px;">
+						<div class="btn-group"><a href="/100" class="btn btn-outline-success btn-sm" >до 100 м.кв.</a></div>
+						<div class="btn-group"><a href="/100-150" class="btn btn-outline-success btn-sm">100 - 150 м.кв</a></div>
+						<div class="btn-group"><a href="/150" class="btn btn-outline-success btn-sm">от 150 м.кв</a></div>
+						<div class="btn-group"><a href="/" class="btn btn-outline-success btn-sm" style="font-size: 1.226rem;">Все проекты</a></div>
+					</div>
+				</div>
+			</div>
+	<div class="section">
+		<div class="jumbotron">
+			<div class="row">
+                <div class="col-lg-12" style="padding: 15px;">
+                    <div class="product-item">
+                        <h3 style="color: #28a745">{{ product.name }}</h3>
+                        <div class="row">
+                            <div class="col-lg-12" style="padding-right: 115px; padding-left: 115px;">
+                                <!--{% for image_item in product.productimage_set.all %}
+                                    <img src="{{ image_item.image.url}}" class="img-resporsive"style="max-width: 100%; height: auto;">
+                                {% endfor %}-->
+
+
+								<div id="block-for-slider">
+									<div id="viewport">
+										<ul id="slidewrapper">
+
+											{% for image_item in product.productimage_set.all %}
+												<li class="slide"><img src="{{ image_item.image.url}}" alt="1" class="slide-img"></li>
+											{% endfor %}
+										</ul>
+
+										<div id="prev-next-btns">
+											<div id="prev-btn" style="background: url('{% static 'mainApp/image/left.png' %}') 40px 40px; background-size: cover;opacity: 0.7;"></div>
+											<div id="next-btn" style="background: url('{% static 'mainApp/image/right.png' %}') 40px 40px; background-size: cover;opacity: 0.7;"></div>
+										</div>
+
+										<ul id="nav-btns">
+											{% for image_item in product.productimage_set.all %}
+												<li class="slide-nav-btn"  style="background: url('{{ image_item.image.url}}'); background-size: cover;"></li>
+											{% endfor %}
+										</ul>
+									</div>
+								</div>
+                            </div>
+							<div class="col-lg-5" style="padding-left: 115px;">
+								<h4 style="color: #28a745; text-align:left">Параметры:</h4>
+								<table class="table table-striped" style="text-align: left; width:300px" >
+									<tbody>
+										<tr>
+										  <th scope="row">Площадь дома</th>
+										  <td>{{product.area}} м.кв.</td>
+										</tr>
+										<tr>
+											<th scope="row">Количество комнат</th>
+											<td>{{product.rooms}}</td>
+										</tr>
+										<tr>
+											<th scope="row">Тип фундамента</th>
+											<td>{{product.foundation}}</td>
+										</tr>
+										<tr>
+											<th scope="row">Высота потолков</th>
+											<td>{{product.height}} м.</td>
+										</tr>
+										<tr>
+											<th scope="row">Количество этажей</th>
+											<td>{{product.floors}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="col-lg-7" style="padding-right: 115px;">
+								<div class="price" >
+									<h5 style=" float: left; padding-top:13px;  padding-left: 190px;">Итоговая цена: </h5><h2 style="color: #28a745; text-align: right">{{product.price}}</h2>
+								</div>
+								<h4 style="color: #28a745; text-align:left">Дополнительные возможности:</h4>
+								<div class="container_box">
+									<div class="add_more">
+										<input type="checkbox" name="cb" id="roof" data-price ="{{ product.price }}" data-roof="{{ product.roof_price }}" onclick="func_roof()"/>
+										<label for="roof"><h4 style="float: left;">Металло черепица</h4><h5 style="color: #28a745;float: left; margin-bottom: 0; padding-top: 3px;">+{{product.roof_price}}</h5></label>
+									</div>
+									<div class="add_more">
+										<input type="checkbox" name="cb" id="water" data-water="{{ product.water_price }}" onclick="func_water()"/>
+										<label for="water"><h4 style="float: left;">Водоснабжение</h4><h5 style="color: #28a745;float: left; margin-bottom: 0; padding-top: 3px;">+{{product.water_price}}</h5></label>
+									</div>
+									<div class="add_more">
+										<input type="checkbox" name="cb" id="front" data-front="{{ product.front_price }}" onclick="func_front()"/>
+										<label for="front"><h4 style="float: left;">Отделка фасада</h4><h5 style="color: #28a745;float: left; margin-bottom: 0; padding-top: 3px;">+{{product.front_price}}</h5></label>
+									</div>
+								</div>
+							</div>
+							<p></p>
+							<!--
+                            <div class="col-lg-4">
+                                <div class="">
+                                    <h5 style="color: #28a745">
+                                        Описание: {{ product.description }}
+                                    </h5>
+                                </div>
+                                <div class="">
+									<button type="submit" class="btn btn-success bth-buy"  data-price ="{{ product.price }}">{{ product.price }}</button>
+                                    <p>
+										Цена: data-price
+                                    </p>
+                                </div>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+			<form action="" method="post" class="form-inline text-center">{% csrf_token %}
+				<div class="form-group">
+					<label>Ваш email:</label>
+					<input type="email" name="form.email.name" class="form-control">
+				</div>
+				<div class="form-group">
+					<label>Ваше имя:</label>
+					<input type="text" name="form.name.name" class="form-control">
+				</div>
+					<button type="submit" class="btn btn-primary">Отправить</button>
+			</form>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+<div class="col-lg-4" style="padding: 15px;">
+    <div class="product-item">
+        <a href="{% url 'product' product_image.product.id %}" style="text-decoration: none;">
+            <h4 style="color: #28a745">{{ product_image.product.name }} </h4>
+        </a>
+        <div>
+            <a href="{% url 'product' product_image.product.id %}">
+                <img src="{{ product_image.image.url }}" class="img-responsive" style="max-width: 100%; height: auto;">
+            </a>
+        </div>
+        <!--<p style="margin-bottom: 5px;"> {{ product_image.product.description|truncatechars_html:20 }}</p>-->
+        <div style=" text-align: left;">
+            <h5 style="margin-bottom: 5px; color: #28a745;">Площадь: {{ product_image.product.area }} м.кв.</h5>
+            <h5 style="margin-bottom: 5px; color: #28a745;">Количество комнат: {{ product_image.product.rooms }}</h5>
+            <div class="btn_price">
+            <a class="btn btn-success" href="{% url 'product' product_image.product.id %}" style="border-top-right-radius: 1.25rem; border-bottom-right-radius: 1.25rem;">
+                    {{ product_image.product.price }} RUB
+            </a>
+        </div>
+        </div>
+    </div>
+</div>
