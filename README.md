@@ -18,5 +18,5 @@ pip3 isntall -r requirements.txt
 
 #### From folder mysite
 ```
-python3 managa.py runserver
+python3 manage.py runserver
 ```
