@@ -7,19 +7,16 @@
 
 Please check your python version with the following command. The result should be 3.6 or higher.
 ```
-python --version
+python3 --version
 ```
 Django and Pillow can be installed via pip.
 ```
-python pip install django
-```
-```
-python pip install Pillow
+pip3 isntall -r requirements.txt
 ```
 
 ### Run
 
 #### From folder mysite
 ```
-python managa.py runserver
+python3 managa.py runserver
 ```
